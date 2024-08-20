@@ -30,12 +30,13 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git pull origin main --rebase
 
-      - name: Commit Changes
+      - name: Commit and Push Changes
         run: |
           git add --all
           git commit -m "Update scraped data" || echo "No changes to commit"
+          git pull origin main --rebase || echo "Failed to rebase, continuing with push"
+          git push origin main
 
       - name: Push Changes
         uses: ad-m/github-push-action@master
