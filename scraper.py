@@ -27,7 +27,7 @@ def save_to_hdf5(data, filename='data.h5'):
         date_group = f.require_group(date_str)
 
         for item in data:
-            scrape_time = item['scrape_time'].replace(':', '-')
+            scrape_time = item['scrape_time']
             description = item['description']
             stock_group = date_group.require_group(description)
 
