@@ -1,0 +1,43 @@
+name: Web Scraping Automation
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs at midnight UTC every day
+  workflow_dispatch:
+
+jobs:
+  scrape_data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Web Scraping Script
+        run: |
+          python scrape.py  # Adjust this to the name of your scraping script
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git pull origin main --rebase
+
+      - name: Commit Changes
+        run: |
+          git add --all
+          git commit -m "Update scraped data" || echo "No changes to commit"
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
