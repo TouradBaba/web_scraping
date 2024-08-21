@@ -30,7 +30,7 @@ def convert_to_numeric(value):
     except ValueError:
         return float('nan')
 
-def save_to_hdf5(data, filename='data.h5'):
+def save_to_hdf5(data, filename='scraped_data/data.h5'):
     with h5py.File(filename, 'a') as f:
         date_str = datetime.now().strftime('%Y-%m-%d')
         date_group = f.require_group(date_str)
