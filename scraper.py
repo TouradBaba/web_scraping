@@ -86,6 +86,6 @@ def scrape_data_from_csv(csv_file):
     return results
 
 if __name__ == "__main__":
-    input_csv = 'URLs.csv'
+    input_csv = 'URLs/URLs.csv'
     scraped_data = scrape_data_from_csv(input_csv)
     save_to_hdf5(scraped_data)

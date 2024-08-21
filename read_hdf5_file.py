@@ -1,7 +1,7 @@
 import h5py
 import json
 
-def read_from_hdf5(filename='data.h5'):
+def read_from_hdf5(filename='scraped_data/data.h5'):
     with h5py.File(filename, 'r') as f:
         for date_str in f.keys():
             print(f"Date: {date_str}")
