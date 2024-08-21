@@ -1,4 +1,5 @@
 import h5py
+import json
 
 def read_from_hdf5(filename='data.h5'):
     with h5py.File(filename, 'r') as f:
@@ -13,9 +14,20 @@ def read_from_hdf5(filename='data.h5'):
                     print(f"    Scrape Time: {scrape_time}")
                     print(f"      Stock Price: {stock_subgroup['stock_price'][()]}")
                     print(f"      Price Change: {stock_subgroup['price_change'][()]}")
-                    print(f"      Price Change Percent: {stock_subgroup['price_change_percent'][()].decode('utf-8')}")
+                    print(f"      Price Change Percent: {stock_subgroup['price_change_percent'][()]}")
                     print(f"      URL: {stock_subgroup.attrs['url']}")
-                    print(f"      Scrape Time (Metadata): {stock_subgroup.attrs['scrape_time']}")
+                    print(f"      Scrape Time (stored): {stock_subgroup.attrs['scrape_time']}")
+
+                    # Read and print metadata descriptions
+                    descriptions_json = stock_subgroup.attrs.get('description', '{}')
+                    descriptions = json.loads(descriptions_json)
+                    print("      Metadata Descriptions:")
+                    for key, desc in descriptions.items():
+                        print(f"        {key}: {desc}")
+
+                    # Print general notes
+                    note = stock_subgroup.attrs.get('note', 'No notes available.')
+                    print(f"      Notes: {note}")
 
 if __name__ == "__main__":
     read_from_hdf5()

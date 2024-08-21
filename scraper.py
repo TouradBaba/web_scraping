@@ -1,10 +1,10 @@
+import json
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 import csv
 import h5py
 
-# Function to scrape stock data from Yahoo Finance
 def scrape_stock_data(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
@@ -21,40 +21,50 @@ def scrape_stock_data(url):
 
     return stock_data
 
+def convert_to_numeric(value):
+    try:
+        if '%' in value:
+            return float(value.strip('()%').replace(',', ''))
+        else:
+            return float(value.replace(',', ''))
+    except ValueError:
+        return float('nan')
+
 def save_to_hdf5(data, filename='data.h5'):
     with h5py.File(filename, 'a') as f:
         date_str = datetime.now().strftime('%Y-%m-%d')
         date_group = f.require_group(date_str)
 
         for item in data:
-            scrape_time = item['scrape_time']
+            scrape_time = item['scrape_time'].split(' ')[1]
             description = item['description']
             stock_group = date_group.require_group(description)
 
             if scrape_time not in stock_group:
                 stock_subgroup = stock_group.create_group(scrape_time)
 
-                stock_price = float(item['stock_price'].replace(',', ''))
-                price_change = float(item['price_change'].replace(',', '').replace('+', ''))
-                price_change_percent = item['price_change_percent']
+                stock_price = convert_to_numeric(item['stock_price'])
+                price_change = convert_to_numeric(item['price_change'])
+                price_change_percent = convert_to_numeric(item['price_change_percent'])
 
-                # Save stock price and changes as floats
                 stock_subgroup.create_dataset('stock_price', data=stock_price)
                 stock_subgroup.create_dataset('price_change', data=price_change)
+                stock_subgroup.create_dataset('price_change_percent', data=price_change_percent)
 
-                # Save price_change_percent as a string
-                stock_subgroup.create_dataset(
-                    'price_change_percent',
-                    data=price_change_percent
-                )
-
-                # Store metadata
                 stock_subgroup.attrs['url'] = item['url']
-                stock_subgroup.attrs['scrape_time'] = item['scrape_time']
+                stock_subgroup.attrs['scrape_time'] = scrape_time
+
+                # Store metadata as JSON strings
+                descriptions = {
+                    'stock_price': 'Stock price in USD',
+                    'price_change': 'Absolute change in stock price from the previous close. Positive values indicate an increase, negative values indicate a decrease.',
+                    'price_change_percent': 'Percentage change in stock price from the previous close, numeric value without percentage sign or parentheses. E.g., -0.37'
+                }
+                stock_subgroup.attrs['description'] = json.dumps(descriptions)
+                stock_subgroup.attrs['note'] = 'Percentage values are stored as float without percentage sign or parentheses.'
 
     print(f"Data successfully saved to {filename}")
 
-# Function to scrape data from each URL in the CSV file
 def scrape_data_from_csv(csv_file):
     results = []
 
