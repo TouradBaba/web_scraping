@@ -2,8 +2,8 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-import csv
 import h5py
+import pandas as pd
 
 def scrape_stock_data(url):
     response = requests.get(url)
@@ -29,6 +29,38 @@ def convert_to_numeric(value):
             return float(value.replace(',', ''))
     except ValueError:
         return float('nan')
+
+def scrape_data_from_csv(file):
+    results = []
+
+    # Read CSV file content into a DataFrame
+    df = pd.read_csv(file)
+
+    # Iterate over each row in the DataFrame
+    for _, row in df.iterrows():
+        url = row['url']
+        description = row['description']
+        try:
+            stock_data = scrape_stock_data(url)
+            results.append({
+                "description": description,
+                "url": url,
+                "stock_price": stock_data['price'],
+                "price_change": stock_data['change'],
+                "price_change_percent": stock_data['change_percent'],
+                "scrape_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            })
+        except Exception as e:
+            results.append({
+                "description": description,
+                "url": url,
+                "stock_price": 'Error',
+                "price_change": 'Error',
+                "price_change_percent": 'Error',
+                "scrape_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            })
+
+    return results
 
 def save_to_hdf5(data, filename='scraped_data/data.h5'):
     with h5py.File(filename, 'a') as f:
@@ -65,14 +97,17 @@ def save_to_hdf5(data, filename='scraped_data/data.h5'):
 
     print(f"Data successfully saved to {filename}")
 
-def scrape_data_from_csv(csv_file):
+def scrape_data_from_csv(file):
     results = []
 
-    with open(csv_file, mode='r') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            url = row['url']
-            description = row['description']
+    # Read CSV file content into a DataFrame
+    df = pd.read_csv(file)
+
+    # Iterate over each row in the DataFrame
+    for _, row in df.iterrows():
+        url = row['url']
+        description = row['description']
+        try:
             stock_data = scrape_stock_data(url)
             results.append({
                 "description": description,
@@ -80,6 +115,15 @@ def scrape_data_from_csv(csv_file):
                 "stock_price": stock_data['price'],
                 "price_change": stock_data['change'],
                 "price_change_percent": stock_data['change_percent'],
+                "scrape_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            })
+        except Exception as e:
+            results.append({
+                "description": description,
+                "url": url,
+                "stock_price": 'Error',
+                "price_change": 'Error',
+                "price_change_percent": 'Error',
                 "scrape_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             })
 

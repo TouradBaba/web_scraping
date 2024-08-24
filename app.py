@@ -38,16 +38,14 @@ st.subheader('Upload CSV file')
 csv_file = st.file_uploader("Upload CSV file", type=["csv"])
 
 if csv_file is not None:
-    # Save the uploaded file
-    csv_path = 'temp.csv'
-    with open(csv_path, 'wb') as f:
-        f.write(csv_file.getvalue())
+    try:
+        # Process the file directly
+        st.write("Scraping data from the uploaded CSV...")
+        scraped_data = scrape_data_from_csv(csv_file)
 
-    # Process the file
-    st.write("Scraping data from the uploaded CSV...")
-    scraped_data = scrape_data_from_csv(csv_path)
-
-    # Display scraped data
-    df = pd.DataFrame(scraped_data)
-    st.write("Scraped Data:")
-    st.dataframe(df)  # Using st.dataframe for better display options
+        # Display scraped data
+        df = pd.DataFrame(scraped_data)
+        st.write("Scraped Data:")
+        st.dataframe(df)  # Using st.dataframe for better display options
+    except Exception as e:
+        st.error(f"An error occurred while processing the CSV file: {e}")
