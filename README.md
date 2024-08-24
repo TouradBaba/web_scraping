@@ -1,6 +1,6 @@
 # Web Scraping Tool
 
-## Overview
+## Introduction
 
 The Yahoo Finance Stock Data Scraper is a Python-based tool designed for collecting, storing, and visualizing stock data from Yahoo Finance. This project integrates web scraping techniques, efficient data storage using the HDF5 format, and data visualization. Automation of the scraping process is achieved through GitHub Actions and Windows Task Scheduler.
 
