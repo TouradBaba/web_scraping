@@ -7,3 +7,6 @@ __pycache__/
 
 # Ignore PyCharm project files
 .idea/
+
+# Ignore Jupyter Notebook checkpoint files
+.ipynb_checkpoints/

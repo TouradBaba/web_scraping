@@ -67,7 +67,15 @@ HDF5 is chosen for its capability to efficiently handle large datasets, providin
 
 ## Visualization
 
-The `visualization.ipynb` notebook generates plots of stock prices, price changes, and percentage changes using Matplotlib and Seaborn.
+The `visualization.ipynb` notebook offers visual insights into the stock data, generating plots for stock prices, price changes, and percentage changes using Matplotlib and Seaborn. The visualizations include:
+
+1. **Daily Stock Price Visualization**  
+   ![Daily Visualization](Images/Day.png)
+
+2. **Hourly Stock Price Visualization**  
+   ![Hourly Visualization](Images/Hours.png)
+
+These visualizations help analyze stock trends over different time intervals.
 
 ## Repository Structure
 
