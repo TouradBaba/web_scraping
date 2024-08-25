@@ -80,6 +80,7 @@ These visualizations help analyze stock trends over different time intervals.
 ## Repository Structure
 
 - **.github/workflows**: Contains the `auto_scrap.yml` file for automating the scraping process using GitHub Actions.
+- **Images**: Contains images from the `visualization.ipynb` notebook, such as daily and hourly stock price visualizations.
 - **URLs**: Includes the `URLs.ipynb` notebook to store the URLs in a CSV file.
 - **scraped_data**: Contains the HDF5 file with scraped data from Yahoo Finance, organized by date and company.
 - **.gitattributes**: Defines attributes for the repository.
