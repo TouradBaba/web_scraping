@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains a Python-based tool designed for collecting, storing, and visualizing stock data from Yahoo Finance. This project integrates web scraping techniques, efficient data storage using the HDF5 format, and data visualization. Automation of the scraping process is achieved through GitHub Actions and Windows Task Scheduler.
+This repository contains a Python tool designed for collecting, storing, and visualizing stock data from Yahoo Finance. This project integrates web scraping techniques, efficient data storage using the HDF5 format, and data visualization. Automation of the scraping process is achieved through GitHub Actions and Windows Task Scheduler.
 
 ## Features
 
