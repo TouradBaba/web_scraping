@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Web Scraping Script
         run: |
-          python scraper.py  # Adjust this to the name of your scraping script
+          python scraper.py
 
       - name: Configure Git
         run: |
