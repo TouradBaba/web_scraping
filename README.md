@@ -75,7 +75,20 @@ The `visualization.ipynb` notebook offers visual insights into the stock data, g
 2. **Hourly Stock Price Visualization**  
    ![Hourly Visualization](Images/Hours.png)
 
-These visualizations help analyze stock trends over different time intervals.
+### Interpretation of the Visualizations
+1-Daily Visualizations:
+- Consistent Patterns Across Companies: The visualizations for the daily data on short periods show that the three companies exhibit similar trends over time. This could indicate that the companies are reacting to broader market forces in a similar manner. For example, a general upward trend might suggest positive market conditions affecting all three companies, while synchronized drops might point to external factors impacting the entire sector.
+- Smooth Temporal Changes: The daily data often shows smoother trends, with gradual changes rather than abrupt fluctuations. This could be due to the aggregation of data over a full day, which tends to average out short-term noise and highlights more significant movements. 
+
+2-Hourly Visualizations:
+- Variation in Intra-Day Patterns: Unlike the daily visualizations on short periods, the hourly data reveals more distinct patterns for each company. This suggests that while the companies may follow similar daily trends, their intra-day price movements can differ due to factors like company-specific news, trading volumes, or other microeconomic events.
+- More Volatile Changes: The hourly plots often display more volatility, with sharp increases or decreases in stock prices within short time frames. This reflects the dynamic nature of stock prices during trading hours, where prices can react rapidly to new information or market sentiment.
+
+3-Conclusion:
+- The daily visualizations provide a broad overview of how the companies' stocks perform over time, showing similar trends across companies.
+- The hourly visualizations, however, reveal the uniqueness in how each company's stock behaves within a day, capturing the more nuanced and immediate reactions to market events.
+
+These insights demonstrate the importance of visualizing data at different temporal resolutions, as daily and hourly views can offer complementary perspectives on stock performance. The daily data helps to identify overall trends, while the hourly data provides a closer look at the company's behavior within those trends.
 
 ## Repository Structure
 
