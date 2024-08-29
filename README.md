@@ -19,6 +19,7 @@ This repository contains a Python tool designed for collecting, storing, and vis
 4. [Visualization](#Visualization)
 5. [Repository Structure](#repository-structure)
 6. [Getting Started](#getting-started)
+7. [Clarification on Data Sources](#clarification-on-data-sources)
 
 ## Overview
 
@@ -33,15 +34,18 @@ This project involves scraping stock data from Yahoo Finance pages, processing t
 
 ## Python Script
 
-### Overview of the Scraping Process
+### Overview of the Scraping Approach
 
-The `scraper.py` script is designed to scrape stock data from Yahoo Finance pages.
+This repository contains two methods for scraping stock data from Yahoo Finance:
+1. Using `yfinance` to retrieve stock data directly via ticker symbols.
+2. Using BeautifulSoup to scrape data directly from Yahoo Finance web pages.
 
-### Detailed Explanation of the `scraper.py` Script
+### Detailed Explanation of the Scripts
 
-- **Scraping Methodology**: Utilizes BeautifulSoup to parse HTML and extract stock data.
-- **Extraction of Numeric Information**: Converts scraped data into numeric format for accurate analysis.
-- **Handling Errors and Missing Data**: Implements error handling to manage issues during scraping.
+- **`yfinance` Integration**: This method uses `yfinance` to pull stock data using ticker symbols directly. It is a straightforward and efficient way to retrieve financial data, especially when working with well-known stocks.
+- **BeautifulSoup-Based Scraper (`scraper.py`)**: This script is designed to scrape stock data directly from Yahoo Finance pages using BeautifulSoup. It parses HTML to extract stock prices, price changes, and percentage changes.
+
+> **Note:** The `scraper.py` script demonstrates how to scrape data from Yahoo Finance using BeautifulSoup, but the repository primarily relies on `yfinance` for data collection. The scraped data is stored in an HDF5 file named `data.h5`.
 
 ### Automating the Scraping Process
 
@@ -94,13 +98,14 @@ These insights demonstrate the importance of visualizing data at different tempo
 
 - **.github/workflows**: Contains the `auto_scrap.yml` file for automating the scraping process using GitHub Actions.
 - **Images**: Contains images from the `visualization.ipynb` notebook, such as daily and hourly stock price visualizations.
+- **scraping_scripts**: Contains scripts for scraping stock data using `yfinance` and BeautifulSoup.
 - **URLs**: Includes the `URLs.ipynb` notebook to store the URLs in a CSV file.
+- **Tickers**: Includes the `Tickers.ipynb` notebook to store the tickers in a CSV file.
 - **scraped_data**: Contains the HDF5 file with scraped data from Yahoo Finance, organized by date and company.
 - **.gitattributes**: Defines attributes for the repository.
 - **.gitignore**: Specifies files and directories to be ignored by version control.
 - **read_hdf5_file.py**: Script for reading data stored in HDF5 format.
 - **requirements.txt**: Lists the dependencies required for the project.
-- **scraper.py**: Main script for scraping stock data from Yahoo Finance.
 - **scraping.bat**: Batch file for automating the scraping process on Windows systems using Task Scheduler.
 - **visualization.ipynb**: Jupyter Notebook for visualizing the scraped stock data.
 
@@ -116,3 +121,7 @@ These insights demonstrate the importance of visualizing data at different tempo
 1. Clone the repository: `https://github.com/TouradBaba/web_scraping.git`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Navigate to the repository directory: `cd <repo_directory>`
+
+## Clarification on Data Sources
+
+The `scraper.py` script demonstrates how to scrape data from Yahoo Finance using BeautifulSoup, but the repository primarily relies on `yfinance` for data collection. The scraped data is stored in an HDF5 file named `data.h5`.

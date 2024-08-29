@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import h5py
 import pandas as pd
+import os
 
 def scrape_stock_data(url):
     response = requests.get(url)
@@ -62,7 +63,7 @@ def scrape_data_from_csv(file):
 
     return results
 
-def save_to_hdf5(data, filename='scraped_data/data.h5'):
+def save_to_hdf5(data, filename='../scraped_data/data.h5'):
     with h5py.File(filename, 'a') as f:
         date_str = datetime.now().strftime('%Y-%m-%d')
         date_group = f.require_group(date_str)
@@ -130,6 +131,6 @@ def scrape_data_from_csv(file):
     return results
 
 if __name__ == "__main__":
-    input_csv = 'URLs/URLs.csv'
+    input_csv = os.path.join('../..', 'URLs', 'URLs.csv')
     scraped_data = scrape_data_from_csv(input_csv)
     save_to_hdf5(scraped_data)

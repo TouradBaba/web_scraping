@@ -15,7 +15,7 @@ def read_from_hdf5(filename='scraped_data/data.h5'):
                     print(f"      Stock Price: {stock_subgroup['stock_price'][()]}")
                     print(f"      Price Change: {stock_subgroup['price_change'][()]}")
                     print(f"      Price Change Percent: {stock_subgroup['price_change_percent'][()]}")
-                    print(f"      URL: {stock_subgroup.attrs['url']}")
+                    print(f"      Ticker: {stock_subgroup.attrs['Ticker']}")
 
                     # Read and print metadata descriptions
                     descriptions_json = stock_subgroup.attrs.get('description', '{}')

@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Web Scraping Script
         run: |
-          python scraper.py
+          python scraping_scripts/yfinance_scraper.py
 
       - name: Configure Git
         run: |
