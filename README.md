@@ -19,7 +19,7 @@ This repository contains a Python tool designed for collecting, storing, and vis
 4. [Visualization](#Visualization)
 5. [Repository Structure](#repository-structure)
 6. [Getting Started](#getting-started)
-7. [Clarification on Data Sources](#clarification-on-data-sources)
+7. [Clarification on Data Collection](#clarification-on-data-collection)
 
 ## Overview
 
@@ -122,6 +122,6 @@ These insights demonstrate the importance of visualizing data at different tempo
 2. Install dependencies: `pip install -r requirements.txt`
 3. Navigate to the repository directory: `cd <repo_directory>`
 
-## Clarification on Data Sources
+## Clarification on Data Collection
 
 The `scraper.py` script demonstrates how to scrape data from Yahoo Finance using BeautifulSoup, but the repository primarily relies on `yfinance` for data collection. The scraped data is stored in an HDF5 file named `data.h5`.
